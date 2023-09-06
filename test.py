@@ -4,10 +4,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+from selenium.webdriver.support.ui import Select
 
-# ระบุพาธของ ChromeDriver (เปลี่ยนเป็นพาธของ chromedriver.exe บนคอมพิวเตอร์ของคุณ)
+# ระบุพาธของ ChromeDriver 
 chrome_driver_path = "C:/Users/jay/chromedriver.exe"
-
 
 # เริ่มต้น WebDriver
 driver = webdriver.Chrome()
@@ -16,8 +16,6 @@ driver.maximize_window()
 
 # เปิดเว็บไซต์ของคุณ
 driver.get("https://online-web-mauve.vercel.app/")
-
-
 
 # คลิกปุ่ม "เข้าสู่ระบบ"
 open_modal_button = driver.find_element(By.XPATH, "//span[text()='เข้าสู่ระบบ']")
@@ -38,5 +36,48 @@ login_button = driver.find_element(By.XPATH, "//button[text()='เข้าส�
 login_button.click()
 
 # รอสักครู่เพื่อให้หน้าเว็บโหลดและดำเนินการต่อ
-time.sleep(5)  # รอ 10 วินาที (หรือตามที่คุณต้องการ)
+time.sleep(5)  # รอ 5 วินาที (หรือตามที่คุณต้องการ)
 
+# คลิกปุ่ม "จองคิว" โดยใช้ XPath
+booking_button = driver.find_element(By.XPATH, "//h4[text()='จองคิว']")
+booking_button.click()
+
+time.sleep(2)
+
+# กรอกข้อมูลในฟิลด์ "กรุณาระบุอาการเบื้องต้น"
+symptom_input = driver.find_element(By.XPATH, "//input[@name='symptom']")
+symptom_input.send_keys("ปวดพัน")
+
+time.sleep(2)
+
+# สร้าง Select object จาก element dropdown
+department_dropdown = Select(driver.find_element(By.XPATH, "//select[@name='department_id']"))
+
+# เลือกแผนกที่คุณต้องการ (เช่น "ทันตกรรม")
+department_dropdown.select_by_visible_text("ทันตกรรม")
+
+time.sleep(2)
+
+# กรอกข้อมูลในฟิลด์ "วันที่"
+date_input = driver.find_element(By.XPATH, "//input[@name='queue_date']")
+date_input.send_keys("07-09-2023")  # แทน "2023-09-10" ด้วยวันที่ที่คุณต้องการ
+
+time.sleep(2)
+
+# คลิกปุ่ม "จองคิว" โดยใช้ XPath
+booking_button = driver.find_element(By.XPATH, "//button[text()='จองคิว']")
+booking_button.click()
+
+time.sleep(2)
+# คลิกปุ่ม "ตกลง" โดยใช้ XPath
+confirm_button = driver.find_element(By.XPATH, "//button[text()='ตกลง']")
+confirm_button.click()
+
+
+time.sleep(5)
+
+
+
+# ตรวจสอบข้อมูลหลังจากกรอกและทำความเรียบร้อย
+# คุณสามารถเพิ่มเครื่องหมายการตรวจสอบข้อมูลหรือข้อความที่ควรตรวจสอบหลังจากกรอกข้อมูลแต่ละช่องได้
+# ตามที่คุณต้องการ
