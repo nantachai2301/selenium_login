@@ -60,7 +60,7 @@ time.sleep(2)
 
 # กรอกข้อมูลในฟิลด์ "วันที่"
 date_input = driver.find_element(By.XPATH, "//input[@name='queue_date']")
-date_input.send_keys("07-09-2023")  # แทน "2023-09-10" ด้วยวันที่ที่คุณต้องการ
+date_input.send_keys("08-09-2023")  # แทน "2023-09-10" ด้วยวันที่ที่คุณต้องการ
 
 time.sleep(2)
 
@@ -73,11 +73,48 @@ time.sleep(2)
 confirm_button = driver.find_element(By.XPATH, "//button[text()='ตกลง']")
 confirm_button.click()
 
+# # คลิกปุ่ม "รายการจองคิว" โดยใช้ XPath
+# queue_list_button = driver.find_element(By.XPATH, "//h4[text()='รายการจองคิว']")
+# queue_list_button.click()
+
+time.sleep(2)
+
+# คลิกที่ input ประเภทวันที่ (type="date")
+date_input = driver.find_element(By.XPATH, "//input[@type='date']")
+date_input.click()
+
+# ตั้งค่าวันที่เป็นวันนี้ (สามารถใช้วิธีอื่น ๆ ในการตั้งค่าวันที่ตามที่คุณต้องการ)
+date_input.clear()
+date_input.send_keys("08-09-2023")  # เอาเป็นวันเดือนปีนะจ๊ะ
+
+time.sleep(2)
+
+department_dropdown = Select(driver.find_element(By.XPATH, "//select[@class='form-select']"))
+# เลือกแผนกที่คุณต้องการ (เช่น "ทันตกรรม")
+department_dropdown.select_by_visible_text("ทันตกรรม")
+
+time.sleep(2)
+
+queue_status_dropdown = Select(driver.find_element(By.XPATH, "//div[@class='col-2']//select[@class='form-select']"))
+
+# เลือกคิวที่คุณต้องการ (เช่น "คิวที่จอง") ( "1" คิวที่จอง ) ("2" คิวที่กำลังดำเนินการ ) ("4"  ประวัติการจองคิว )
+queue_status_dropdown.select_by_value("1")
+
+
+time.sleep(3)
+# คลิกปุ่ม "ยกเลิกคิว" โดยใช้ XPath
+cancel_queue_button = driver.find_element(By.XPATH, "//button[@class='btn btn-danger text-white mx-1 mt-1']")
+cancel_queue_button.click()
+
+time.sleep(2)
+
+# คลิกปุ่ม "ใช่, ยกเลิกคิว" โดยใช้ XPath
+confirm_cancel_button = driver.find_element(By.XPATH, "//button[text()='ใช่, ยกเลิกคิว']")
+confirm_cancel_button.click()
+
+
 
 time.sleep(5)
 
 
 
-# ตรวจสอบข้อมูลหลังจากกรอกและทำความเรียบร้อย
-# คุณสามารถเพิ่มเครื่องหมายการตรวจสอบข้อมูลหรือข้อความที่ควรตรวจสอบหลังจากกรอกข้อมูลแต่ละช่องได้
-# ตามที่คุณต้องการ
