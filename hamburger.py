@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
@@ -67,11 +66,10 @@ driver.execute_script("arguments[0].click();", save_button)
 time.sleep(3) 
 
 # ค้นหาปุ่ม "อัปเดต" โดยใช้ XPath
-update_button = driver.find_element(By.XPATH, '//button[contains(text(), "อัปเดต")]')
+confirm_button = driver.find_element(By.XPATH, "//button[@class='swal2-confirm swal2-styled']")
 
 # คลิกปุ่ม "อัปเดต"
-update_button.click()
+confirm_button.click()
 time.sleep(3) 
-
 
 

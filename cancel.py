@@ -33,50 +33,47 @@ time.sleep(2)
 login_button = driver.find_element(By.XPATH, "//button[text()='เข้าสู่ระบบ']")
 login_button.click()
 
-# รอสักครู่เพื่อให้หน้าเว็บโหลดและดำเนินการต่อ
-time.sleep(5)  # รอ 5 วินาที (หรือตามที่คุณต้องการ)
+time.sleep(5)
 
-# คลิกปุ่ม "จองคิว" โดยใช้ XPath
-booking_button = driver.find_element(By.XPATH, "//h4[text()='จองคิว']")
-booking_button.click()
+queue_list_button = driver.find_element(By.XPATH, "//h4[text()='รายการจองคิว']")
+
+# คลิกปุ่มนี้
+queue_list_button.click()
+time.sleep(2)
+
+# คลิกที่ input ประเภทวันที่ (type="date")
+date_input = driver.find_element(By.XPATH, "//input[@type='date']")
+date_input.click()
+
+# ตั้งค่าวันที่เป็นวันนี้ (สามารถใช้วิธีอื่น ๆ ในการตั้งค่าวันที่ตามที่คุณต้องการ)
+date_input.clear()
+date_input.send_keys("13-09-2023")  # เอาเป็นวันเดือนปีนะจ๊ะ
 
 time.sleep(2)
 
-# กรอกข้อมูลในฟิลด์ "กรุณาระบุอาการเบื้องต้น"
-symptom_input = driver.find_element(By.XPATH, "//input[@name='symptom']")
-symptom_input.send_keys("ปวดพัน")
-
-time.sleep(2)
-
-# สร้าง Select object จาก element dropdown
-department_dropdown = Select(driver.find_element(By.XPATH, "//select[@name='department_id']"))
-
+department_dropdown = Select(driver.find_element(By.XPATH, "//select[@class='form-select']"))
 # เลือกแผนกที่คุณต้องการ (เช่น "ทันตกรรม")
 department_dropdown.select_by_visible_text("ทันตกรรม")
 
 time.sleep(2)
 
-# กรอกข้อมูลในฟิลด์ "วันที่"
-date_input = driver.find_element(By.XPATH, "//input[@name='queue_date']")
-date_input.send_keys("13-09-2023")  # แทน "2023-09-10" ด้วยวันที่ที่คุณต้องการ
+queue_status_dropdown = Select(driver.find_element(By.XPATH, "//div[@class='col-2']//select[@class='form-select']"))
+
+# เลือกคิวที่คุณต้องการ (เช่น "คิวที่จอง") ( "1" คิวที่จอง ) ("2" คิวที่กำลังดำเนินการ ) ("4"  ประวัติการจองคิว )
+queue_status_dropdown.select_by_value("1")
+
+
+time.sleep(3)
+# คลิกปุ่ม "ยกเลิกคิว" โดยใช้ XPath
+cancel_queue_button = driver.find_element(By.XPATH, "//button[@class='btn btn-danger text-white mx-1 mt-1']")
+cancel_queue_button.click()
 
 time.sleep(2)
 
-# คลิกปุ่ม "จองคิว" โดยใช้ XPath
-booking_button = driver.find_element(By.XPATH, "//button[text()='จองคิว']")
-booking_button.click()
-
-time.sleep(2)
-# คลิกปุ่ม "ตกลง" โดยใช้ XPath
-confirm_button = driver.find_element(By.XPATH, "//button[text()='ตกลง']")
-confirm_button.click()
-
-# # คลิกปุ่ม "รายการจองคิว" โดยใช้ XPath
-# queue_list_button = driver.find_element(By.XPATH, "//h4[text()='รายการจองคิว']")
-# queue_list_button.click()
-
-time.sleep(2)
+# คลิกปุ่ม "ใช่, ยกเลิกคิว" โดยใช้ XPath
+confirm_cancel_button = driver.find_element(By.XPATH, "//button[text()='ใช่, ยกเลิกคิว']")
+confirm_cancel_button.click()
 
 
 
-
+time.sleep(5)
