@@ -58,7 +58,7 @@ time.sleep(2)
 
 # กรอกข้อมูลในฟิลด์ "วันที่"
 date_input = driver.find_element(By.XPATH, "//input[@name='queue_date']")
-date_input.send_keys("13-09-2023")  # แทน "2023-09-10" ด้วยวันที่ที่คุณต้องการ
+date_input.send_keys("28-09-2023")  # แทน "2023-09-10" ด้วยวันที่ที่คุณต้องการ
 
 time.sleep(2)
 
@@ -68,7 +68,7 @@ booking_button.click()
 
 time.sleep(2)
 # คลิกปุ่ม "ตกลง" โดยใช้ XPath
-confirm_button = driver.find_element(By.XPATH, "//button[text()='ตกลง']")
+confirm_button = driver.find_element(By.XPATH, "//button[text()='ยืนยัน']")
 confirm_button.click()
 
 # # คลิกปุ่ม "รายการจองคิว" โดยใช้ XPath
