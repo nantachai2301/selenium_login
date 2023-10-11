@@ -1,218 +1,229 @@
+import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-import time
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
-# ระบุพาธของ ChromeDriver 
-chrome_driver_path = "C:/Users/jay/chromedriver.exe"
+from selenium.webdriver.support import expected_conditions as EC
+import time
 
-# เริ่มต้น WebDriver
-driver = webdriver.Chrome()
-# ขยายหน้าต่างเบราว์เซอร์ให้เต็มหน้าจอ
-driver.maximize_window()
+class YourSeleniumTest(unittest.TestCase):
+    def setUp(self):
+        # ระบุพาธของ ChromeDriver
+        self.chrome_driver_path = "C:/Users/jay/chromedriver.exe"
 
-# เปิดเว็บไซต์ของคุณ
-driver.get("https://online-web-mauve.vercel.app/")
+        # เริ่มต้น WebDriver
+        self.driver = webdriver.Chrome()
+        # ขยายหน้าต่างเบราวเซอร์ให้เต็มหน้าจอ
+        self.driver.maximize_window()
 
-# คลิกปุ่ม "เข้าสู่ระบบ"
-open_modal_button = driver.find_element(By.XPATH, "//span[text()='เข้าสู่ระบบ']")
-open_modal_button.click()
+        # เปิดเว็บไซต์ของคุณ
+        self.driver.get("https://online-web-mauve.vercel.app/")
 
-# ระบุ element ของรหัสประจำตัวประชาชนและรหัสผ่านใน Modal
-id_input = driver.find_element(By.XPATH, "//label[text()='รหัสประจำตัวประชาชน']/following-sibling::input")
-password_input = driver.find_element(By.XPATH, "//label[text()='รหัสผ่าน']/following-sibling::input")
+    def test_run_selenium(self):
+        # คลิกปุ่ม "เข้าสู่ระบบ"
+        open_modal_button = self.driver.find_element(By.XPATH, "//span[text()='เข้าสู่ระบบ']")
+        open_modal_button.click()
 
-# กรอกข้อมูลใน input field
-id_input.send_keys("7777777777777")
-password_input.send_keys("123456")
+        # ระบุ element ของรหัสประจำตัวประชาชนและรหัสผ่านใน Modal
+        id_input = self.driver.find_element(By.XPATH, "//label[text()='รหัสประจำตัวประชาชน']/following-sibling::input")
+        password_input = self.driver.find_element(By.XPATH, "//label[text()='รหัสผ่าน']/following-sibling::input")
 
-time.sleep(2)
+        # กรอกข้อมูลใน input field
+        id_input.send_keys("7777777777777")
+        password_input.send_keys("123456")
 
-# คลิกปุ่ม "เข้าสู่ระบบ" ด้วย XPath
-login_button = driver.find_element(By.XPATH, "//button[text()='เข้าสู่ระบบ']")
-login_button.click()
+        time.sleep(2)
 
-# รอสักครู่เพื่อให้หน้าเว็บโหลดและดำเนินการต่อ
-time.sleep(5)  # รอ 5 วินาที (หรือตามที่คุณต้องการ)
+        # คลิกปุ่ม "เข้าสู่ระบบ" ด้วย XPath
+        login_button = self.driver.find_element(By.XPATH, "//button[text()='เข้าสู่ระบบ']")
+        login_button.click()
 
-link_element = WebDriverWait(driver, 10).until(
-    EC.element_to_be_clickable((By.XPATH, '//div[contains(text(), "จองคิวผู้ป่วย Walk in")]')
-)
-)
-driver.execute_script("arguments[0].click();", link_element)
-time.sleep(2)
+        # รอสักครู่เพื่อให้หน้าเว็บโหลดและดำเนินการต่อ
+        time.sleep(5)  # รอ 5 วินาที (หรือตามที่คุณต้องการ)
 
-# คลิกปุ่ม "เพิ่มผู้ป่วย Walk In" โดยใช้ ID
-add_patient_button = driver.find_element(By.ID,"BookingWalkinAddbook-an-appointment")
-add_patient_button.click()
+        link_element = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '//div[contains(text(), "จองคิวผู้ป่วย Walk in")]'))
+        )
+        link_element.click()
+        time.sleep(2)
 
-time.sleep(2)
+        # คลิกปุ่ม "เพิ่มผู้ป่วย Walk In" โดยใช้ ID
+        add_patient_button = self.driver.find_element(By.ID, "BookingWalkinAddbook-an-appointment")
+        add_patient_button.click()
 
-# ระบุ element ของฟิลด์เลขบัตรประชาชน
-id_card_input = driver.find_element(By.ID, "MainBookAuthor_id_card")
+        time.sleep(2)
 
-# กรอกเลขบัตรประชาชนในฟิลด์
-id_card_input.send_keys("1749800297083")  # แทน "1234567890123" ด้วยเลขบัตรประชาชนที่คุณต้องการ
+        # ระบุ element ของฟิลด์เลขบัตรประชาชน
+        id_card_input = self.driver.find_element(By.ID, "MainBookAuthor_id_card")
 
-time.sleep(1)
+        # กรอกเลขบัตรประชาชนในฟิลด์
+        id_card_input.send_keys("1749800297083")  # แทน "1234567890123" ด้วยเลขบัตรประชาชนที่คุณต้องการ
 
-# ระบุ element ของ dropdown
-prefix_name_dropdown = Select(driver.find_element(By.ID, "MainBookAuthor_prefix_name"))
+        time.sleep(1)
 
-# เลือกคำนำหน้าที่คุณต้องการ (เช่น "นาย")
-prefix_name_dropdown.select_by_value("นาย")  # หรือจะใช้ .select_by_visible_text("นาย") ก็ได้
+        # ระบุ element ของ dropdown
+        prefix_name_dropdown = Select(self.driver.find_element(By.ID, "MainBookAuthor_prefix_name"))
 
-time.sleep(1)
+        # เลือกคำนำหน้าที่คุณต้องการ (เช่น "นาย")
+        prefix_name_dropdown.select_by_value("นาย")  # หรือจะใช้ .select_by_visible_text("นาย") ก็ได้
 
-# ระบุ element ของช่องข้อมูลชื่อ
-first_name_input = driver.find_element(By.ID, "MainBookAuthor_first_name")
+        time.sleep(1)
 
-# กรอกชื่อที่คุณต้องการ
-first_name_input.send_keys("นันทชัย")
+        # ระบุ element ของช่องข้อมูลชื่อ
+        first_name_input = self.driver.find_element(By.ID, "MainBookAuthor_first_name")
 
-time.sleep(1)
+        # กรอกชื่อที่คุณต้องการ
+        first_name_input.send_keys("นันทชัย")
 
-# ระบุ element ของช่องข้อมูลนามสกุล
-last_name_input = driver.find_element(By.ID, "MainBookAuthor_last_name")
+        time.sleep(1)
 
-# กรอกนามสกุลที่คุณต้องการ
-last_name_input.send_keys("แสงอรุณ")
+        # ระบุ element ของช่องข้อมูลนามสกุล
+        last_name_input = self.driver.find_element(By.ID, "MainBookAuthor_last_name")
 
-time.sleep(1)
+        # กรอกนามสกุลที่คุณต้องการ
+        last_name_input.send_keys("แสงอรุณ")
 
-# ระบุ element ของเพศ
-gender_dropdown = Select(driver.find_element(By.ID, "MainBookAuthor_gender"))
+        time.sleep(1)
 
-# เลือกเพศที่คุณต้องการ (เช่น "ชาย")
-gender_dropdown.select_by_value("ชาย")
+        # ระบุ element ของเพศ
+        gender_dropdown = Select(self.driver.find_element(By.ID, "MainBookAuthor_gender"))
 
-time.sleep(1)
+        # เลือกเพศที่คุณต้องการ (เช่น "ชาย")
+        gender_dropdown.select_by_value("ชาย")
 
-# ระบุ element ของวันเดือนปีเกิด
-birthday_input = driver.find_element(By.ID, "MainBookAuthor_birthday")
+        time.sleep(1)
 
-# กรอกข้อมูลใน input field (ในกรณีนี้เราจะใช้ "1990-01-01" เป็นตัวอย่าง)
-birthday_input.send_keys("23-01-2002")
+        # ระบุ element ของวันเดือนปีเกิด
+        birthday_input = self.driver.find_element(By.ID, "MainBookAuthor_birthday")
 
-time.sleep(1)
+        # กรอกข้อมูลใน input field (ในกรณีนี้เราจะใช้ "1990-01-01" เป็นตัวอย่าง)
+        birthday_input.send_keys("23-01-2002")
 
-# ระบุ element ของน้ำหนัก
-weight_input = driver.find_element(By.ID, "MainBookAuthor_weight")
+        time.sleep(1)
 
-# กรอกข้อมูลใน input field 
-weight_input.send_keys("80")
+        # ระบุ element ของน้ำหนัก
+        weight_input = self.driver.find_element(By.ID, "MainBookAuthor_weight")
 
-time.sleep(1)
+        # กรอกข้อมูลใน input field
+        weight_input.send_keys("80")
 
-# ระบุ element ของส่วนสูง
-height_input = driver.find_element(By.ID, "MainBookAuthor_height")
+        time.sleep(1)
 
-# กรอกข้อมูลใน input field
-height_input.send_keys("175")
+        # ระบุ element ของส่วนสูง
+        height_input = self.driver.find_element(By.ID, "MainBookAuthor_height")
 
-time.sleep(1)
+        # กรอกข้อมูลใน input field
+        height_input.send_keys("175")
 
-# ระบุ element ของเบอร์โทรศัพท์
-phone_input = driver.find_element(By.ID, "MainBookAuthor_phone")
+        time.sleep(1)
 
-# กรอกข้อมูลใน input field
-phone_input.send_keys("0808165582")
+        # ระบุ element ของเบอร์โทรศัพท์
+        phone_input = self.driver.find_element(By.ID, "MainBookAuthor_phone")
 
-time.sleep(1)
+        # กรอกข้อมูลใน input field
+        phone_input.send_keys("0808165582")
 
-# ระบุ element ของรหัสผ่าน
-password_input = driver.find_element(By.ID, "MainAddpassword")
+        time.sleep(1)
 
-# กรอกรหัสผ่านใน input field (ในกรณีนี้เราจะใช้ "MyPassword123" เป็นตัวอย่าง)
-password_input.send_keys("123456")
+        # ระบุ element ของรหัสผ่าน
+        password_input = self.driver.find_element(By.ID, "MainAddpassword")
 
-time.sleep(1)
+        # กรอกรหัสผ่านใน input field (ในกรณีนี้เราจะใช้ "123456" เป็นตัวอย่าง)
+        password_input.send_keys("123456")
 
-# ระบุ element ของชื่อ
-contact_first_name_input = driver.find_element(By.ID, "MainBookAuthor_contact_first_name")
+        time.sleep(1)
 
-# กรอกชื่อใน input field (ในกรณีนี้เราจะใช้ "John" เป็นตัวอย่าง)
-contact_first_name_input.send_keys("อลิสรา")
+        # ระบุ element ของชื่อ
+        contact_first_name_input = self.driver.find_element(By.ID, "MainBookAuthor_contact_first_name")
 
-time.sleep(1)
+        # กรอกชื่อใน input field (ในกรณีนี้เราจะใช้ "อลิสรา" เป็นตัวอย่าง)
+        contact_first_name_input.send_keys("อลิสรา")
 
-# ระบุ element ของนามสกุล
-contact_last_name_input = driver.find_element(By.ID, "MainBookAuthor_contact_last_name")
+        time.sleep(1)
 
-# กรอกนามสกุลใน input field (ในกรณีนี้เราจะใช้ "Doe" เป็นตัวอย่าง)
-contact_last_name_input.send_keys("ขีดแต้ม")
+        # ระบุ element ของนามสกุล
+        contact_last_name_input = self.driver.find_element(By.ID, "MainBookAuthor_contact_last_name")
 
-time.sleep(1)
+        # กรอกนามสกุลใน input field (ในกรณีนี้เราจะใช้ "ขีดแต้ม" เป็นตัวอย่าง)
+        contact_last_name_input.send_keys("ขีดแต้ม")
 
-# ระบุ element ของความสัมพันธ์
-relation_select = Select(driver.find_element(By.ID, "MainBookAuthor_contact_relation_id"))
+        time.sleep(1)
 
-# เลือกความสัมพันธ์ 
-relation_select.select_by_value("ภรรยา")
+        # ระบุ element ของความสัมพันธ์
+        relation_select = Select(self.driver.find_element(By.ID, "MainBookAuthor_contact_relation_id"))
 
-time.sleep(1)
+        # เลือกความสัมพันธ์
+        relation_select.select_by_value("ภรรยา")
 
-# ระบุ element ของเบอร์โทร
-phone_input = driver.find_element(By.ID, "MainBookAuthor_contact_phoneNumber")
+        time.sleep(1)
 
-# กรอกเบอร์โทร
-phone_input.send_keys("0944871974")
+        # ระบุ element ของเบอร์โทร
+        phone_input = self.driver.find_element(By.ID, "MainBookAuthor_contact_phoneNumber")
 
-time.sleep(1)
+        # กรอกเบอร์โทร
+        phone_input.send_keys("0944871974")
 
-# ระบุ element ของบ้านเลขที่
-address_input = driver.find_element(By.ID, "MainBookAuthor_address")
+        time.sleep(1)
 
-# กรอกบ้านเลขที่
-address_input.send_keys("95")
+        # ระบุ element ของบ้านเลขที่
+        address_input = self.driver.find_element(By.ID, "MainBookAuthor_address")
 
-time.sleep(1)
+        # กรอกบ้านเลขที่
+        address_input.send_keys("95")
 
-# ระบุ element ของเลือกจังหวัด
-province_select = Select(driver.find_element(By.ID, "MainBookAuthor_province"))
+        time.sleep(1)
 
-# เลือกจังหวัดนครปฐม
-province_select.select_by_visible_text("นครปฐม")
+        # ระบุ element ของเลือกจังหวัด
+        province_select = Select(self.driver.find_element(By.ID, "MainBookAuthor_province"))
 
-time.sleep(1)
+        # เลือกจังหวัดนครปฐม
+        province_select.select_by_visible_text("นครปฐม")
 
-# ระบุ element ของ input อำเภอ
-district_input = driver.find_element(By.ID, "MainBookAuthor_district")
+        time.sleep(1)
 
-# กรอกอำเภอ "กำแพงแสน"
-district_input.send_keys("กำแพงแสน")
+        # ระบุ element ของ input อำเภอ
+        district_input = self.driver.find_element(By.ID, "MainBookAuthor_district")
 
-time.sleep(1)
+        # กรอกอำเภอ "กำแพงแสน"
+        district_input.send_keys("กำแพงแสน")
 
-# ระบุ element ของ input ตำบล
-subdistrict_input = driver.find_element(By.ID, "MainBookAuthor_subdistrict")
+        time.sleep(1)
 
-# กรอกตำบล "ห้วยม่วง"
-subdistrict_input.send_keys("ห้วยม่วง")
+        # ระบุ element ของ input ตำบล
+        subdistrict_input = self.driver.find_element(By.ID, "MainBookAuthor_subdistrict")
 
-time.sleep(1)
+        # กรอกตำบล "ห้วยม่วง"
+        subdistrict_input.send_keys("ห้วยม่วง")
 
-# ระบุ element ของ input รหัสไปรษณีย์
-postcode_input = driver.find_element(By.ID, "MainBookAuthor_postcode")
+        time.sleep(1)
 
-# กรอกรหัสไปรษณีย์ "73180"
-postcode_input.send_keys("73180")
+        # ระบุ element ของ input รหัสไปรษณีย์
+        postcode_input = self.driver.find_element(By.ID, "MainBookAuthor_postcode")
 
-time.sleep(1)
+        # กรอกรหัสไปรษณีย์ "73180"
+        postcode_input.send_keys("73180")
 
-# ระบุ element ของปุ่ม "บันทึก" ด้วย id
-save_button = driver.find_element( By.ID, "MainBookAuthor_submit")
+        time.sleep(1)
 
-# คลิกปุ่ม "บันทึก"
-save_button.click()
+        # ระบุ element ของปุ่ม "บันทึก" ด้วย id
+        save_button = self.driver.find_element(By.ID, "MainBookAuthor_submit")
 
-time.sleep(5)
+        # คลิกปุ่ม "บันทึก"
+        save_button.click()
 
-# ค้นหาปุ่ม "ยืนยัน" โดยใช้ XPath (หรือวิธีการค้นหาที่ถูกต้อง)
-confirm_button = driver.find_element(By.XPATH, "//button[@class='swal2-confirm swal2-styled']")
+        time.sleep(5)
 
-# คลิกปุ่ม "ยืนยัน"
-confirm_button.click()
+        # ค้นหาปุ่ม "ยืนยัน" โดยใช้ XPath (หรือวิธีการค้นหาที่ถูกต้อง)
+        confirm_button = self.driver.find_element(By.XPATH, "//button[@class='swal2-confirm swal2-styled']")
 
-time.sleep(5)
+        # คลิกปุ่ม "ยืนยัน"
+        confirm_button.click()
+
+        time.sleep(5)
+
+    def tearDown(self):
+        # ปิด WebDriver
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()
