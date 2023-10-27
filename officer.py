@@ -60,14 +60,14 @@ class YourTestCase(unittest.TestCase):
         symptom_input = driver.find_element(By.ID, 'BookingWalkinsymptom')
 
         # กรอกข้อมูลในฟิลด์
-        symptom_input.send_keys('ปวดฟัน')
+        symptom_input.send_keys('')
         time.sleep(1)
 
         # ค้นหาเลือกแผนกโดยใช้ ID
         department_select = Select(driver.find_element(By.ID, 'BookingWalkindepartment_id'))
 
         # เลือกแผนกที่คุณต้องการ
-        department_select.select_by_visible_text('ทันตกรรม')
+        department_select.select_by_visible_text('')
 
         time.sleep(1)
 
@@ -78,7 +78,7 @@ class YourTestCase(unittest.TestCase):
         queue_date_input.clear()
 
         # กรอกวันที่ที่คุณต้องการ (เป็นรูปแบบ 'YYYY-MM-DD')
-        desired_date = '01-10-2023'  # เปลี่ยนเป็นวันที่ที่คุณต้องการ
+        desired_date = ''  # เปลี่ยนเป็นวันที่ที่คุณต้องการ
         queue_date_input.send_keys(desired_date)
 
         # รอสักครู่ให้ข้อมูลถูกป้อนเข้าฟิลด์

@@ -57,7 +57,7 @@ class YourSeleniumTest(unittest.TestCase):
         id_card_input = self.driver.find_element(By.ID, "MainBookAuthor_id_card")
 
         # กรอกเลขบัตรประชาชนในฟิลด์
-        id_card_input.send_keys("1749800297083")  # แทน "1234567890123" ด้วยเลขบัตรประชาชนที่คุณต้องการ
+        id_card_input.send_keys("")  # แทน "1234567890123" ด้วยเลขบัตรประชาชนที่คุณต้องการ
 
         time.sleep(1)
 
@@ -65,7 +65,7 @@ class YourSeleniumTest(unittest.TestCase):
         prefix_name_dropdown = Select(self.driver.find_element(By.ID, "MainBookAuthor_prefix_name"))
 
         # เลือกคำนำหน้าที่คุณต้องการ (เช่น "นาย")
-        prefix_name_dropdown.select_by_value("นาย")  # หรือจะใช้ .select_by_visible_text("นาย") ก็ได้
+        prefix_name_dropdown.select_by_value("")  # หรือจะใช้ .select_by_visible_text("นาย") ก็ได้
 
         time.sleep(1)
 
@@ -73,7 +73,7 @@ class YourSeleniumTest(unittest.TestCase):
         first_name_input = self.driver.find_element(By.ID, "MainBookAuthor_first_name")
 
         # กรอกชื่อที่คุณต้องการ
-        first_name_input.send_keys("นันทชัย")
+        first_name_input.send_keys("")
 
         time.sleep(1)
 
@@ -81,7 +81,7 @@ class YourSeleniumTest(unittest.TestCase):
         last_name_input = self.driver.find_element(By.ID, "MainBookAuthor_last_name")
 
         # กรอกนามสกุลที่คุณต้องการ
-        last_name_input.send_keys("แสงอรุณ")
+        last_name_input.send_keys("")
 
         time.sleep(1)
 
@@ -89,7 +89,7 @@ class YourSeleniumTest(unittest.TestCase):
         gender_dropdown = Select(self.driver.find_element(By.ID, "MainBookAuthor_gender"))
 
         # เลือกเพศที่คุณต้องการ (เช่น "ชาย")
-        gender_dropdown.select_by_value("ชาย")
+        gender_dropdown.select_by_value("")
 
         time.sleep(1)
 
@@ -97,7 +97,7 @@ class YourSeleniumTest(unittest.TestCase):
         birthday_input = self.driver.find_element(By.ID, "MainBookAuthor_birthday")
 
         # กรอกข้อมูลใน input field (ในกรณีนี้เราจะใช้ "1990-01-01" เป็นตัวอย่าง)
-        birthday_input.send_keys("23-01-2002")
+        birthday_input.send_keys("")
 
         time.sleep(1)
 
@@ -105,7 +105,7 @@ class YourSeleniumTest(unittest.TestCase):
         weight_input = self.driver.find_element(By.ID, "MainBookAuthor_weight")
 
         # กรอกข้อมูลใน input field
-        weight_input.send_keys("80")
+        weight_input.send_keys("")
 
         time.sleep(1)
 
@@ -113,7 +113,7 @@ class YourSeleniumTest(unittest.TestCase):
         height_input = self.driver.find_element(By.ID, "MainBookAuthor_height")
 
         # กรอกข้อมูลใน input field
-        height_input.send_keys("175")
+        height_input.send_keys("")
 
         time.sleep(1)
 
@@ -121,7 +121,7 @@ class YourSeleniumTest(unittest.TestCase):
         phone_input = self.driver.find_element(By.ID, "MainBookAuthor_phone")
 
         # กรอกข้อมูลใน input field
-        phone_input.send_keys("0808165582")
+        phone_input.send_keys("")
 
         time.sleep(1)
 
@@ -129,7 +129,7 @@ class YourSeleniumTest(unittest.TestCase):
         password_input = self.driver.find_element(By.ID, "MainAddpassword")
 
         # กรอกรหัสผ่านใน input field (ในกรณีนี้เราจะใช้ "123456" เป็นตัวอย่าง)
-        password_input.send_keys("123456")
+        password_input.send_keys("")
 
         time.sleep(1)
 
@@ -137,7 +137,7 @@ class YourSeleniumTest(unittest.TestCase):
         contact_first_name_input = self.driver.find_element(By.ID, "MainBookAuthor_contact_first_name")
 
         # กรอกชื่อใน input field (ในกรณีนี้เราจะใช้ "อลิสรา" เป็นตัวอย่าง)
-        contact_first_name_input.send_keys("อลิสรา")
+        contact_first_name_input.send_keys("")
 
         time.sleep(1)
 
@@ -145,7 +145,7 @@ class YourSeleniumTest(unittest.TestCase):
         contact_last_name_input = self.driver.find_element(By.ID, "MainBookAuthor_contact_last_name")
 
         # กรอกนามสกุลใน input field (ในกรณีนี้เราจะใช้ "ขีดแต้ม" เป็นตัวอย่าง)
-        contact_last_name_input.send_keys("ขีดแต้ม")
+        contact_last_name_input.send_keys("")
 
         time.sleep(1)
 
@@ -153,7 +153,7 @@ class YourSeleniumTest(unittest.TestCase):
         relation_select = Select(self.driver.find_element(By.ID, "MainBookAuthor_contact_relation_id"))
 
         # เลือกความสัมพันธ์
-        relation_select.select_by_value("ภรรยา")
+        relation_select.select_by_value("")
 
         time.sleep(1)
 
@@ -161,7 +161,7 @@ class YourSeleniumTest(unittest.TestCase):
         phone_input = self.driver.find_element(By.ID, "MainBookAuthor_contact_phoneNumber")
 
         # กรอกเบอร์โทร
-        phone_input.send_keys("0944871974")
+        phone_input.send_keys("")
 
         time.sleep(1)
 
@@ -169,7 +169,7 @@ class YourSeleniumTest(unittest.TestCase):
         address_input = self.driver.find_element(By.ID, "MainBookAuthor_address")
 
         # กรอกบ้านเลขที่
-        address_input.send_keys("95")
+        address_input.send_keys("")
 
         time.sleep(1)
 
@@ -177,7 +177,7 @@ class YourSeleniumTest(unittest.TestCase):
         province_select = Select(self.driver.find_element(By.ID, "MainBookAuthor_province"))
 
         # เลือกจังหวัดนครปฐม
-        province_select.select_by_visible_text("นครปฐม")
+        province_select.select_by_visible_text("")
 
         time.sleep(1)
 
@@ -185,7 +185,7 @@ class YourSeleniumTest(unittest.TestCase):
         district_input = self.driver.find_element(By.ID, "MainBookAuthor_district")
 
         # กรอกอำเภอ "กำแพงแสน"
-        district_input.send_keys("กำแพงแสน")
+        district_input.send_keys("")
 
         time.sleep(1)
 
@@ -193,7 +193,7 @@ class YourSeleniumTest(unittest.TestCase):
         subdistrict_input = self.driver.find_element(By.ID, "MainBookAuthor_subdistrict")
 
         # กรอกตำบล "ห้วยม่วง"
-        subdistrict_input.send_keys("ห้วยม่วง")
+        subdistrict_input.send_keys("")
 
         time.sleep(1)
 
@@ -201,7 +201,7 @@ class YourSeleniumTest(unittest.TestCase):
         postcode_input = self.driver.find_element(By.ID, "MainBookAuthor_postcode")
 
         # กรอกรหัสไปรษณีย์ "73180"
-        postcode_input.send_keys("73180")
+        postcode_input.send_keys("")
 
         time.sleep(1)
 

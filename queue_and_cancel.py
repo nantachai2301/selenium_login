@@ -47,7 +47,7 @@ class YourSeleniumTest(unittest.TestCase):
 
         # กรอกข้อมูลในฟิลด์ "กรุณาระบุอาการเบื้องต้น"
         symptom_input = self.driver.find_element(By.XPATH, "//input[@name='symptom']")
-        symptom_input.send_keys("ปวดพัน")
+        symptom_input.send_keys("")
 
         time.sleep(2)
 
@@ -61,7 +61,7 @@ class YourSeleniumTest(unittest.TestCase):
 
         # กรอกข้อมูลในฟิลด์ "วันที่"
         date_input = self.driver.find_element(By.XPATH, "//input[@name='queue_date']")
-        date_input.send_keys("12-11-2023")  # แทน "2023-09-10" ด้วยวันที่ที่คุณต้องการ
+        date_input.send_keys("12-11-2021")  # แทน "2023-09-10" ด้วยวันที่ที่คุณต้องการ
 
         time.sleep(2)
 
